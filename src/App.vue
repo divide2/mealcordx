@@ -1,6 +1,4 @@
 <script>
-var Fly = require('flyio')
-var fly = new Fly()
 
 export default {
   created () {
@@ -16,9 +14,13 @@ export default {
     wx.login({
       success: res => {
         if (res.code) {
-          console.log(res)
+          wx.getUserInfo({
+            success: (res) => {
+              this.userInfo = res.userInfo
+            }
+          })
           wx.request({
-            url: 'https://bvvy.ngrok.xiaomiqiu.cn/login/mp',
+            url: `${baseURL}/login/mp`,
             data: {code: res.code},
             method: 'POST',
             success (data) { console.log(data) }
@@ -28,7 +30,6 @@ export default {
         }
       }
     })
-    fly.get(`${baseURL}/v1/product/find`).then((res) => { console.log(res) })
   }
 }
 </script>
