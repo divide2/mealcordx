@@ -4,6 +4,9 @@ var fly = new Fly()
 
 export default {
   created () {
+    console.log(process)
+    const baseURL = process.env.API_BASE_URL
+
     // 调用API从本地缓存中获取数据
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -25,7 +28,7 @@ export default {
         }
       }
     })
-    fly.get('https://bvvy.ngrok.xiaomiqiu.cn/v1/product/find').then((res) => { console.log(res) })
+    fly.get(`${baseURL}/v1/product/find`).then((res) => { console.log(res) })
   }
 }
 </script>

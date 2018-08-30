@@ -19,11 +19,14 @@
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
     <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
+    <bottom-menu></bottom-menu>
+
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
+import bottomMenu from '@/components/bottomMenu'
 
 export default {
   data () {
@@ -32,9 +35,8 @@ export default {
       userInfo: {}
     }
   },
-
   components: {
-    card
+    card, bottomMenu
   },
 
   methods: {
