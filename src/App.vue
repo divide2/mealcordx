@@ -22,7 +22,7 @@ export default {
           wx.request({
             url: `${baseURL}/login/mp`,
             data: {code: res.code},
-            method: 'POST',
+            method: 'GET',
             success (data) { console.log(data) }
           })
         } else {

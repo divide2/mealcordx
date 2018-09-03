@@ -2,10 +2,8 @@
   <div class="container">
 
     <div class="products">
-      <div class="list">
-        <div class="item" v-for="(item,index) in data.content">
-          <card :position="item.cdp"></card>
-        </div>
+      <div class="item" v-for="(item,index) in data.content" :key="index">
+        <card :address="item.cdp" :tags="item.tags" :images="item.images"></card>
       </div>
     </div>
 
@@ -17,11 +15,9 @@
 
 <script>
 import card from '@/components/card/card'
-import bottomMenu from '@/components/bottomMenu'
+import bottomMenu from '@/components/bottomMenu/bottomMenu'
+import Api from '@/utils/api'
 
-const baseURL = process.env.API_BASE_URL
-var Fly = require('flyio')
-var fly = new Fly()
 export default {
   data () {
     return {
@@ -37,7 +33,7 @@ export default {
   methods: {
     getUserInfo () {
       // 调用登录接口
-      fly.get(`${baseURL}/v1/product/find`).then((res) => { this.data = res.data })
+      Api.get('/v1/product/find').then((res) => { this.data = res })
     }
   },
   created () {
@@ -52,5 +48,8 @@ export default {
     padding: 20px 20px
     .products
       background-color: #fff
+      width: 100%
+      .item
+        margin-bottom: 20px
 
 </style>

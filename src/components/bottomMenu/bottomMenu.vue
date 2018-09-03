@@ -1,6 +1,7 @@
 <template>
   <div class="bottom-menu">
     <div class="item">
+      <img src="home_img" alt="">
       <span>首页</span>
     </div>
     <div class="item">发布</div>
@@ -9,7 +10,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      home_img: '/static/image/bottomMenu/home.png'
+    }
+  }
+}
 </script>
 
 <style lang="sass">

@@ -8,12 +8,17 @@
 
 <script>
 export default {
-  props: ['text']
+  props: {
+    text: {
+      type: String,
+      default: '深圳'
+    }
+  }
 }
 </script>
 
 <style>
-.card {
-  padding: 10px;
-}
+  .card {
+    padding: 10px;
+  }
 </style>
