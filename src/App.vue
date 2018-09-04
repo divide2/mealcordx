@@ -1,10 +1,8 @@
 <script>
-
+import Api from './utils/api'
 export default {
   created () {
     console.log(process)
-    const baseURL = process.env.API_BASE_URL
-
     // 调用API从本地缓存中获取数据
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -19,12 +17,8 @@ export default {
               this.userInfo = res.userInfo
             }
           })
-          wx.request({
-            url: `${baseURL}/login/mp`,
-            data: {code: res.code},
-            method: 'GET',
-            success (data) { console.log(data) }
-          })
+          console.log(res)
+          Api.post('/login/mp', {code: res.code}).then((res) => { console.log(res) })
         } else {
           console.log('登录失败')
         }
