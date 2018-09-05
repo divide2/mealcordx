@@ -1,5 +1,6 @@
 <script>
 import Api from './utils/api'
+
 export default {
   created () {
     console.log(process)
@@ -12,13 +13,18 @@ export default {
     wx.login({
       success: res => {
         if (res.code) {
-          wx.getUserInfo({
-            success: (res) => {
-              this.userInfo = res.userInfo
-            }
-          })
           console.log(res)
-          Api.post('/login/mp', {code: res.code}).then((res) => { console.log(res) })
+          Api.post('/login/mp', {code: res.code}).then((res) => {
+            wx.getUserInfo({
+              success: (response) => {
+                response.userInfo.skey = res.skey
+                Api.post('/v1/mp/user', response.userInfo)
+              },
+              fail: (error) => {
+                console.log(error)
+              }
+            })
+          })
         } else {
           console.log('登录失败')
         }

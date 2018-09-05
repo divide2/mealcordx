@@ -9,18 +9,38 @@
 
     <i-button type="primary">dian</i-button>
 
-    <i-tab-bar current="current" fixed color="#f00">
-      <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="Home">首页</i-tab-bar-item>
-      <i-tab-bar-item key="group" icon="group" current-icon="group_fill" title="Friends">首页</i-tab-bar-item>
-      <i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" count="3" title="Notice">首页</i-tab-bar-item>
-      <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" dot title="My">首页</i-tab-bar-item>
-    </i-tab-bar>
+    <bottom-menu></bottom-menu>
 
+    <i-toast id="toast"></i-toast>
+
+    <!--<div class="bottom-menu">-->
+      <!--<i-tab-bar current="current" fixed="true" color="#f00">-->
+        <!--<i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>-->
+        <!--<i-tab-bar-item key="group" icon="service" current-icon="service_fill" title="商城"></i-tab-bar-item>-->
+        <!--<i-tab-bar-item key="group" icon="send" current-icon="send" title="发布"></i-tab-bar-item>-->
+        <!--<i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" count="3" title="消息"></i-tab-bar-item>-->
+        <!--<i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" dot title="我的"></i-tab-bar-item>-->
+      <!--</i-tab-bar>-->
+    <!--</div>-->
   </div>
 </template>
-
+<style scoped lang="sass">
+  .container
+    padding: 20px 20px
+    .products
+      background-color: #fff
+      width: 100%
+      .item
+        margin-bottom: 20px
+    .bottom-menu
+      width: 100%
+      position: fixed
+      left: 0
+      bottom: 0
+</style>
 <script>
 import card from '@/components/card/card'
+// import bottomMenu from '@/components/bottomMenu'
 import Api from '@/utils/api'
 
 export default {
@@ -45,21 +65,10 @@ export default {
     // 调用应用实例的方法获取全局数据
     this.getUserInfo()
   },
-  handleChange ({ detail }) {
+  handleChange ({detail}) {
     this.setData({
       current: detail.key
     })
   }
 }
 </script>
-
-<style scoped lang="sass">
-  .container
-    padding: 20px 20px
-    .products
-      background-color: #fff
-      width: 100%
-      .item
-        margin-bottom: 20px
-
-</style>
