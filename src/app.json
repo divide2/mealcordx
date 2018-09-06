@@ -1,7 +1,9 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/counter/main"
+    "pages/counter/main",
+    "pages/mine/main",
+    "pages/send/product/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

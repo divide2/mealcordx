@@ -25,6 +25,15 @@ export default {
               }
             })
           })
+
+          wx.getLocation({
+            success: (res) => {
+              wx.setStorage({
+                key: 'position',
+                data: res
+              })
+            }
+          })
         } else {
           console.log('登录失败')
         }

@@ -7,21 +7,12 @@
       </div>
     </div>
 
-    <i-button type="primary">dian</i-button>
+    <i-button type="primary" @click="test=!test">{{test}}</i-button>
 
     <bottom-menu></bottom-menu>
 
     <i-toast id="toast"></i-toast>
 
-    <!--<div class="bottom-menu">-->
-      <!--<i-tab-bar current="current" fixed="true" color="#f00">-->
-        <!--<i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="首页"></i-tab-bar-item>-->
-        <!--<i-tab-bar-item key="group" icon="service" current-icon="service_fill" title="商城"></i-tab-bar-item>-->
-        <!--<i-tab-bar-item key="group" icon="send" current-icon="send" title="发布"></i-tab-bar-item>-->
-        <!--<i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" count="3" title="消息"></i-tab-bar-item>-->
-        <!--<i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" dot title="我的"></i-tab-bar-item>-->
-      <!--</i-tab-bar>-->
-    <!--</div>-->
   </div>
 </template>
 <style scoped lang="sass">
@@ -40,7 +31,7 @@
 </style>
 <script>
 import card from '@/components/card/card'
-// import bottomMenu from '@/components/bottomMenu'
+import bottomMenu from '@/components/bottomMenu'
 import Api from '@/utils/api'
 
 export default {
@@ -49,26 +40,22 @@ export default {
       motto: 'Hello World',
       userInfo: {},
       data: {},
-      current: 'homepage'
+      current: 'homepage',
+      test: false
     }
   },
   components: {
-    card
+    card, bottomMenu
   },
   methods: {
     getUserInfo () {
       // 调用登录接口
-      Api.get('/v1/product/find').then((res) => { this.data = res })
+      Api.get('v1/product/find').then((res) => { this.data = res })
     }
   },
   created () {
     // 调用应用实例的方法获取全局数据
     this.getUserInfo()
-  },
-  handleChange ({detail}) {
-    this.setData({
-      current: detail.key
-    })
   }
 }
 </script>

@@ -2,7 +2,8 @@ import Fly from 'flyio'
 import { $Toast } from '../../static/iview/base/index'
 
 var fly = new Fly()
-fly.config.baseURL = 'https://bvvy.ngrok.xiaomiqiu.cn'
+// fly.config.baseURL = 'https://bvvy.ngrok.xiaomiqiu.cn'
+fly.config.baseURL = 'http://192.168.27.254:8081'
 fly.config.headers = {'Content-Type': 'application/json'}
 
 const Api = {
