@@ -6,13 +6,13 @@
     <div class="right">
       <div class="self-info">
         <div class="basic"><span class="name">{{userName}}</span>·<span>{{creditRatings}}</span><span class="address">{{address}}</span></div>
-        <div class="tags"><span v-for="(item, index) in tags">{{item}}</span></div>
+        <div class="tags"><span v-for="(item, index) in tags" :key="index">{{item}}</span></div>
       </div>
       <div class="content">
         <p class="name">{{name}}</p>
         <p class="remarks">{{remarks}}</p>
         <div class="list">
-          <div class="item" v-for="(item, index) in images"><img :src="item.url" alt=""></div>
+          <div class="item" v-for="(item, index) in images" :key="index"><img :src="item.url" alt=""></div>
         </div>
       </div>
     </div>

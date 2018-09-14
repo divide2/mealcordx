@@ -2,7 +2,7 @@
   <div class="container">
 
     <div class="products">
-      <div class="item" v-for="(item,index) in data.content" :key="index">
+      <div class="item" v-for="(item,index) in list" :key="index">
         <card :address="item.cdp" :tags="item.tags" :images="item.images"></card>
       </div>
     </div>
@@ -10,6 +10,8 @@
     <i-button type="primary" @click="test=!test">{{test}}</i-button>
 
     <bottom-menu></bottom-menu>
+
+    <button open-type="getUserInfo">dianji</button>
 
     <i-toast id="toast"></i-toast>
 
@@ -37,9 +39,9 @@ import Api from '@/utils/api'
 export default {
   data () {
     return {
+      list: [],
       motto: 'Hello World',
       userInfo: {},
-      data: {},
       current: 'homepage',
       test: false
     }
@@ -48,14 +50,49 @@ export default {
     card, bottomMenu
   },
   methods: {
-    getUserInfo () {
+    find () {
       // 调用登录接口
-      Api.get('v1/product/find').then((res) => { this.data = res })
+      console.log(Api.get('/v1/product/find'))
+      Api.get('v1/product/find').then((data) => {
+        console.log('-------', data)
+        this.list = data.content
+      })
     }
   },
   created () {
+    wx.login({
+      success: res => {
+        if (res.code) {
+          console.log(res)
+          Api.post('/login/mp', {code: res.code}).then((res) => {
+            wx.getUserInfo({
+              withCredentials: true,
+              success: (response) => {
+                response.userInfo.skey = res.skey
+                Api.post('/v1/mp/user', response.userInfo).then(data => {
+                  console.log(data)
+                })
+              },
+              fail: (error) => {
+                console.log(error)
+              }
+            })
+          })
+          wx.getLocation({
+            success: (res) => {
+              wx.setStorage({
+                key: 'position',
+                data: res
+              })
+            }
+          })
+        } else {
+          console.log('登录失败')
+        }
+      }
+    })
     // 调用应用实例的方法获取全局数据
-    this.getUserInfo()
+    this.find()
   }
 }
 </script>

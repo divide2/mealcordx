@@ -1,7 +1,26 @@
 <template>
   <div class="bottom">
     <div class="send" v-show="showModal">
-      <navigator url="/pages/send/product/main">发布照片</navigator>
+      <i-row>
+        <i-col span="8" i-class="col-class" @click="showModal=false">
+          <navigator url="/pages/send/product/main" >
+            <div class="option">
+              <i-icon type="picture" size="50" color="#FB681A"></i-icon>
+              <p class="name">发布作品</p>
+            </div>
+          </navigator>
+        </i-col>
+        <i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>
+        <i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>
+        <i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>
+      </i-row>
+
+      <div class="options">
+        <div @click="showModal=false" class="option">
+
+        </div>
+      </div>
+
       <div class="close" @click="showModal=false">
         <i-icon type="delete" size="28" color="#000"></i-icon>
       </div>
@@ -52,7 +71,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   .bottom
     .send
       position: absolute
@@ -62,6 +81,12 @@ export default {
       bottom: 0
       background-color: #fff
       z-index: 5
+      .options
+        .option
+          font-size: 12px
+          text-align: center
+          .name
+            text-align: center
       .close
         position: absolute
         bottom: 20px

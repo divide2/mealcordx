@@ -2,6 +2,7 @@
   <div>
     <i-button>mine</i-button>
     <bottom-menu></bottom-menu>
+    <i-toast id="toast"></i-toast>
   </div>
 
 </template>

@@ -1,5 +1,5 @@
 <script>
-import Api from './utils/api'
+// import Api from './utils/api'
 
 export default {
   created () {
@@ -10,35 +10,6 @@ export default {
     wx.setStorageSync('logs', logs)
 
     console.log('app created and cache logs by setStorageSync')
-    wx.login({
-      success: res => {
-        if (res.code) {
-          console.log(res)
-          Api.post('/login/mp', {code: res.code}).then((res) => {
-            wx.getUserInfo({
-              success: (response) => {
-                response.userInfo.skey = res.skey
-                Api.post('/v1/mp/user', response.userInfo)
-              },
-              fail: (error) => {
-                console.log(error)
-              }
-            })
-          })
-
-          wx.getLocation({
-            success: (res) => {
-              wx.setStorage({
-                key: 'position',
-                data: res
-              })
-            }
-          })
-        } else {
-          console.log('登录失败')
-        }
-      }
-    })
   }
 }
 </script>

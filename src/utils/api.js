@@ -1,24 +1,41 @@
-import Fly from 'flyio'
-import { $Toast } from '../../static/iview/base/index'
-
-var fly = new Fly()
-// fly.config.baseURL = 'https://bvvy.ngrok.xiaomiqiu.cn'
-fly.config.baseURL = 'http://192.168.27.254:8081'
-fly.config.headers = {'Content-Type': 'application/json'}
-
-const Api = {
-  get: (url, data, options) => api(url, data, Object.assign({}, {method: 'get'}, options)),
-  post: (url, data, options) => api(url, data, Object.assign({}, {method: 'post'}, options))
+import axios from 'axios'
+axios.defaults.baseURL = 'http://bvvy.ngrok.xiaomiqiu.cn'
+axios.defaults.adapter = function (config) {
+  return new Promise((resolve, reject) => {
+    console.log(config)
+    wx.request({
+      url: config.url,
+      data: config.data,
+      method: config.method,
+      header: config.headers,
+      success: function (data) {
+        return resolve(data)
+      },
+      fail: function (data) {
+        reject(data)
+      }
+    })
+  })
 }
 
-const api = (url, data, options) => {
+export const Method = {
+  POST: 'post',
+  GET: 'get',
+  DELETE: 'delete',
+  PATCH: 'patch'
+}
+
+const Api = {
+  post: (url, data, headers) => api(url, data, Method.POST, headers),
+  get: (url, params, headers) => api(url, params, Method.GET, headers),
+  delete: (url, data) => api(url, data, Method.DELETE),
+  patch: (url, data) => api(url, data, Method.PATCH)
+}
+
+const api = (url, data, method = 'get', headers) => {
   return new Promise((resolve, reject) => {
-    fly.request(url, data, options).then((res) => {
+    axios({method, url: url, data, params: method === 'get' ? data : {}, headers: headers}).then((res) => {
       if (res.status <= 200) {
-        $Toast({
-          content: '这是一条成功提醒',
-          type: 'success'
-        })
         resolve(res.data)
       } else if (res.status > 200 && res.status < 300) {
         resolve(res.data)
@@ -26,23 +43,13 @@ const api = (url, data, options) => {
         resolve(res.data)
       }
     }).catch((error) => {
-      console.log(error, 'error response')
       const res = error.response
       if (res.status >= 400 && res.status < 500) {
-        $Toast({
-          content: '这是一条失败提醒',
-          type: 'error'
-        })
         resolve(res.data)
       } else {
-        $Toast({
-          content: '这是一条失败提醒',
-          type: 'error'
-        })
         resolve(res.data)
       }
     })
   })
 }
-
 export default Api
