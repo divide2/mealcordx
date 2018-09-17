@@ -83,7 +83,6 @@ export default {
               orderNum: i
             }
           }
-          console.log('-----------', this.form)
         }
       })
     },
