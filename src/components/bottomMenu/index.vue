@@ -1,9 +1,9 @@
 <template>
   <div class="bottom">
     <div class="send" v-show="showModal">
-      <i-row>
+      <i-row class="list">
         <i-col span="8" i-class="col-class" @click="showModal=false">
-          <navigator url="/pages/send/product/main" >
+          <navigator url="/pages/send/product/main">
             <div class="option">
               <i-icon type="picture" size="50" color="#FB681A"></i-icon>
               <p class="name">发布作品</p>
@@ -15,11 +15,11 @@
         <i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>
       </i-row>
 
-      <div class="options">
-        <div @click="showModal=false" class="option">
+      <!--<div class="options">-->
+      <!--<div @click="showModal=false" class="option">-->
 
-        </div>
-      </div>
+      <!--</div>-->
+      <!--</div>-->
 
       <div class="close" @click="showModal=false">
         <i-icon type="delete" size="28" color="#000"></i-icon>
@@ -81,6 +81,11 @@ export default {
       bottom: 0
       background-color: #fff
       z-index: 5
+      .list
+        bottom: 50px
+        left: 0
+        position: absolute
+
       .options
         .option
           font-size: 12px

@@ -5,26 +5,29 @@
       <i-input title="描述" placeholder="请输入作品描述"></i-input>
     </i-panel>
     <i-panel title="上传图片">
-      <!--<div v-for="(item,index) in form.images" :key="index">-->
-      <!--<img :src="item.url" alt="" class="imgItem">-->
-      <!--</div>-->
-      {{form.images[0].url}}
-      <div @click="upload" class="box" v-if="form.images.length<=9">
+      <i-row>
+        <i-col :span="8" v-for="(item,index) in form.images" :key="index">
+          <img :src="item.url" alt="" class="imgItem">
+        </i-col>
+      </i-row>
+      <i-col :span="8" @click="upload" class="box">
         <i-icon type="add" size="40" color="#f00"></i-icon>
-      </div>
+      </i-col>
     </i-panel>
     <i-panel title="标签">
       <i-tag
-        color="blue"
-        v-for="(item,index) in tags"
+        class="tag"
+        v-for="(item, index) in tags"
+        :color="'blue'"
         :key="index"
-        name="item.name"
-        type="border"
-        checkable="true"
-        checked="item.checked"
-        @click="test">
+        :name="item.name"
+        :type="'border'"
+        :checkable="true"
+        :checked="item.checked"
+        @change="onChange(item,index,$event)">
         {{item.name}}
       </i-tag>
+
     </i-panel>
     <i-button type="primary" @click="handleClick">提交</i-button>
     <i-toast id="toast"></i-toast>
@@ -39,7 +42,8 @@
         width: 60px
         overflow: hidden
         .imgItem
-
+    .tag
+      margin-right: 5px
 
 </style>
 <script>
@@ -72,9 +76,7 @@ export default {
     upload () {
       wx.chooseImage({
         success: (res) => {
-          console.log('----------', res)
           for (let i = 0; i < res.tempFilePaths.length; i++) {
-            console.log(res.tempFilePaths[i])
             this.form.images[i] = {
               main: i === 0,
               url: res.tempFilePaths[i],
@@ -86,14 +88,18 @@ export default {
       })
     },
     handleClick () {
+      debugger
+      this.form.tags = this.tags.filter(x =>
+        x.checked === true
+      )
       Api.post('/v1/product', this.form).then((res) => {
         wx.navigateTo({
           url: `/pages/index/main`
         })
       })
     },
-    test () {
-      console.log(1)
+    onChange (item, index, event) {
+      this.$set(item, 'checked', !item.checked)
     }
   }
 }
