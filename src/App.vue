@@ -15,6 +15,7 @@ export default {
 </script>
 
 <style>
+  @import "../static/style/iconfont.css";
   .container {
     height: 100%;
     display: flex;
@@ -32,4 +33,6 @@ export default {
     -webkit-transition: width 2s;
     -o-transition: width 2s;
   }
+
+
 </style>

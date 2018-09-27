@@ -7,6 +7,8 @@
       </div>
     </div>
 
+   <i class="iconfont icon-beizi"></i>
+
     <i-button type="primary" @click="test=!test">{{test}}</i-button>
 
     <bottom-menu></bottom-menu>
@@ -30,6 +32,15 @@
       position: fixed
       left: 0
       bottom: 0
+    .icon
+      width: 1em
+      height: 1em
+      vertical-align: -0.15em
+      fill: currentColor
+      overflow: hidden
+      font-size: 14px
+      color: #f00
+
 </style>
 <script>
 import card from '@/components/card/card'

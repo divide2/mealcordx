@@ -2,7 +2,23 @@
   <div class="bottom">
     <div class="send" v-show="showModal">
       <i-row class="list">
-        <i-col span="8" i-class="col-class" @click="showModal=false">
+        <i-col span="8" i-class="col-class" @click="showModal=false" class="item">
+          <navigator url="/pages/send/product/main">
+            <div class="option">
+              <icon :name="'icon-upload-project'" :color="'#FB681A'" :size="32"></icon>
+              <p class="name">发布作品</p>
+            </div>
+          </navigator>
+        </i-col>
+        <i-col span="8" i-class="col-class" @click="showModal=false" class="item">
+          <navigator url="/pages/send/product/main">
+            <div class="option">
+              <icon :name="'icon-upload-project'" :color="'#FB681A'" :size="32"></icon>
+              <p class="name">发布作品</p>
+            </div>
+          </navigator>
+        </i-col>
+        <i-col span="8" i-class="col-class" @click="showModal=false" class="item">
           <navigator url="/pages/send/product/main">
             <div class="option">
               <i-icon type="picture" size="50" color="#FB681A"></i-icon>
@@ -10,9 +26,17 @@
             </div>
           </navigator>
         </i-col>
-        <i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>
-        <i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>
-        <i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>
+        <i-col span="8" i-class="col-class" @click="showModal=false" class="item">
+          <navigator url="/pages/send/product/main">
+            <div class="option">
+              <i-icon type="picture" size="50" color="#FB681A"></i-icon>
+              <p class="name">发布作品</p>
+            </div>
+          </navigator>
+        </i-col>
+        <!--<i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>-->
+        <!--<i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>-->
+        <!--<i-col span="8" i-class="col-class" @click="showModal=false">col-8</i-col>-->
       </i-row>
 
       <!--<div class="options">-->
@@ -40,16 +64,23 @@
 </template>
 
 <script>
+import icon from '../icon/icon.vue'
 export default {
   data () {
     return {
       showModal: false
     }
   },
+  components: {
+    icon
+  },
   methods: {
     handleChange (res) {
       switch (res.mp.detail.key) {
         case 'homepage':
+          wx.navigateTo({
+            url: `/pages/index/main`
+          })
           break
         case 'shop':
           break
@@ -82,16 +113,14 @@ export default {
       background-color: #fff
       z-index: 5
       .list
+        width: 100%
         bottom: 50px
         left: 0
         position: absolute
-
-      .options
-        .option
-          font-size: 12px
+        .item
           text-align: center
-          .name
-            text-align: center
+          .option
+            font-size: 12px
       .close
         position: absolute
         bottom: 20px
