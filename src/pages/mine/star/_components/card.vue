@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import cImage from '../cImage/index.vue'
+import cImage from '@/components/cImage/index.vue'
 
 export default {
   props: {

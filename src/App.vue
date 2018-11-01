@@ -15,6 +15,7 @@ export default {
 </script>
 
 <style>
+  @import "style/common.css";
   @import "../static/style/iconfont.css";
   .container {
     height: 100%;
@@ -24,6 +25,9 @@ export default {
     justify-content: space-between;
     padding: 200 rpx 0;
     box-sizing: border-box;
+  }
+  body {
+    background-color: #f5f5f5;
   }
 
   /* this rule will be remove */

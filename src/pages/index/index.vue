@@ -1,19 +1,14 @@
 <template>
   <div class="container">
+    <button open-type="getUserInfo">ff</button>
 
     <div class="products">
       <div class="item" v-for="(item,index) in list" :key="index">
-        <card :address="item.cdp" :tags="item.tags" :images="item.images"></card>
+        <card :address="item.cdp" :tags="item.tags" :images="item.images" :id="item.id"></card>
       </div>
     </div>
 
-   <i class="iconfont icon-beizi"></i>
-
-    <i-button type="primary" @click="test=!test">{{test}}</i-button>
-
     <bottom-menu></bottom-menu>
-
-    <button open-type="getUserInfo">dianji</button>
 
     <i-toast id="toast"></i-toast>
 
@@ -22,11 +17,13 @@
 <style scoped lang="sass">
   .container
     padding: 20px 20px
+    background-color: #fff
     .products
       background-color: #fff
       width: 100%
       .item
-        margin-bottom: 20px
+        padding-top: 20px
+        padding-bottom: 20px
     .bottom-menu
       width: 100%
       position: fixed
@@ -41,11 +38,15 @@
       font-size: 14px
       color: #f00
 
+    .item + .item
+      border-top: 1px solid #EEEEEE
+
 </style>
 <script>
 import card from '@/components/card/card'
 import bottomMenu from '@/components/bottomMenu'
 import Api from '@/utils/api'
+import productApi from '@/api/product'
 
 export default {
   data () {
@@ -63,31 +64,27 @@ export default {
   methods: {
     find () {
       // 调用登录接口
-      console.log(Api.get('/v1/product/find'))
-      Api.get('v1/product/find').then((data) => {
-        console.log('-------', data)
+      productApi.all({page: 1, size: 2}).then((data) => {
         this.list = data.content
       })
     }
   },
-  created () {
+  mounted () {
     wx.login({
       success: res => {
         if (res.code) {
           console.log(res)
-          Api.post('/login/mp', {code: res.code}).then((res) => {
-            wx.getUserInfo({
-              withCredentials: true,
-              success: (response) => {
-                response.userInfo.skey = res.skey
-                Api.post('/v1/mp/user', response.userInfo).then(data => {
-                  console.log(data)
-                })
-              },
-              fail: (error) => {
-                console.log(error)
-              }
-            })
+          wx.getUserInfo({
+            withCredentials: true,
+            success: (response) => {
+              response.userInfo.code = res.code
+              Api.post('/login/mp', response.userInfo).then(data => {
+                console.log(data)
+              })
+            },
+            fail: (error) => {
+              console.log(error)
+            }
           })
           wx.getLocation({
             success: (res) => {

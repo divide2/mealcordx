@@ -1,8 +1,8 @@
 import axios from 'axios'
 axios.defaults.baseURL = 'http://bvvy.ngrok.xiaomiqiu.cn'
+// axios.defaults.baseURL = 'http://192.168.31.197:8081'
 axios.defaults.adapter = function (config) {
   return new Promise((resolve, reject) => {
-    console.log(config)
     wx.request({
       url: config.url,
       data: config.data,
@@ -22,14 +22,14 @@ export const Method = {
   POST: 'post',
   GET: 'get',
   DELETE: 'delete',
-  PATCH: 'patch'
+  PUT: 'put'
 }
 
 const Api = {
   post: (url, data, headers) => api(url, data, Method.POST, headers),
   get: (url, params, headers) => api(url, params, Method.GET, headers),
   delete: (url, data) => api(url, data, Method.DELETE),
-  patch: (url, data) => api(url, data, Method.PATCH)
+  put: (url, data) => api(url, data, Method.PUT)
 }
 
 const api = (url, data, method = 'get', headers) => {

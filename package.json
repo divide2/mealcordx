@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "mpvue": "^1.0.11",
+    "qiniu-js": "^2.5.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

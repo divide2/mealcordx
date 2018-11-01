@@ -1,16 +1,16 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
-		"es6": false,
+		"urlCheck": false,
+		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
-	"appid": "touristappid",
-	"projectname": "ying",
+	"appid": "wxc9f0e9e4b9a92b67",
+	"projectname": "Ying",
 	"condition": {
 		"search": {
 			"current": -1,

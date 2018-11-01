@@ -1,7 +1,13 @@
 {
   "pages": [
     "pages/index/main",
-    "pages/mine/main",
+    "pages/mine/index/main",
+    "pages/mine/star/main",
+    "pages/message/index/main",
+    "pages/message/chat/main",
+    "pages/productList/main",
+    "pages/product/detail/main",
+    "pages/product/edit/main",
     "pages/send/product/main"
   ],
   "window": {
